@@ -4,21 +4,43 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strings"
 )
 
-func FindCapitalCity(province string) string {
+func GetCapital(province string) (string, error) {
 	jsonContent, err := os.ReadFile("capital_cities.json")
 
 	if err != nil {
-		fmt.Println("Error reading file:", err)
-		return ""
+		return "", fmt.Errorf("Error al leer el archivo de ciudades capitales %w", err)
 	}
+
 	var capitalCities map[string]string
+
 	err = json.Unmarshal(jsonContent, &capitalCities)
 	if err != nil {
-		fmt.Println("Error encoding JSON:", err)
-		return ""
+		return "", fmt.Errorf("Error al deserializar el archivo de ciudades capitales %w", err)
 	}
-	capitalCity := capitalCities[province]
-	return capitalCity
+
+	simplifiedProvince := strings.ToUpper(province)
+	simplifiedProvince = RemoveAccentMarks(simplifiedProvince)
+
+	capitalCity := capitalCities[simplifiedProvince]
+	if capitalCity == "" {
+		return "", fmt.Errorf("No se encontró la provincia %s", province)
+	}
+
+	return capitalCity, nil
+}
+
+func RemoveAccentMarks(str string) string {
+	str = strings.ReplaceAll(str, "Á", "A")
+
+	str = strings.ReplaceAll(str, "É", "E")
+
+	str = strings.ReplaceAll(str, "Í", "I")
+
+	str = strings.ReplaceAll(str, "Ó", "O")
+
+	str = strings.ReplaceAll(str, "Ú", "U")
+	return str
 }

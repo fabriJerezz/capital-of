@@ -12,8 +12,8 @@ func TestGetCapital (t *testing.T) {
 		expectedCapital string
 	}{
 		{"real province", "Chaco", "Resistencia"},
-		{"case and accent marks", "sÁnTá fÉ", "Santa Fé"},
-		{"another word", "Chiavenato", "No se encontró la provincia Chiavenat"},
+		{"case and accent marks", "sÁnTá fÉ", "Santa Fe"},
+		{"another word", "Chiavenato", "No se encontró la provincia Chiavenato"},
 	}
 	
 	for _, tt := range tests {
@@ -26,7 +26,6 @@ func TestGetCapital (t *testing.T) {
 			if capital != tt.expectedCapital {
 				t.Errorf("GetCapital(%s) = %s; want %s", tt.province, capital, tt.expectedCapital)
 			}
-			
 		})
 	}
 }

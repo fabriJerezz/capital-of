@@ -46,8 +46,8 @@ func TestRemoveAccentMarks (t *testing.T) {
 			receivedString := RemoveAccentMarks(tt.entryString)
 			
 			if receivedString != tt.entryString {
-				t.Errorf("RemoveActionMarks(%s) = %s; want %s", tt.entryString, receivedString, tt.expectedString)
+				t.Errorf("rRemoveActionMarks(%s) = %s; want %s", tt.entryString, receivedString, tt.expectedString)
 			}
 		})
 		}
-}
+} 

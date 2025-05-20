@@ -8,7 +8,7 @@ import (
 )
 
 func GetCapital(province string) (string, error) {
-	jsonContent, err := os.ReadFile("capital_cities.json")
+	jsonContent, err := os.ReadFile("../capital_cities.json")
 
 	if err != nil {
 		return "", fmt.Errorf("Error al leer el archivo de ciudades capitales %w", err)
@@ -26,7 +26,8 @@ func GetCapital(province string) (string, error) {
 
 	capitalCity := capitalCities[simplifiedProvince]
 	if capitalCity == "" {
-		return "", fmt.Errorf("No se encontró la provincia %s", province)
+		answer := fmt.Sprintf("No se encontró la provincia %s", province)
+		return answer, nil
 	}
 
 	return capitalCity, nil

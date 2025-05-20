@@ -14,7 +14,10 @@ jobs:
   build-and-tests:
     runs-on: ubuntu-latest
     steps:
+    # reusable actions that the job uses
     - uses: actions/checkout@v4
+
+    # This is where I would install dependencies if there were any
 
     - name: Set up Go
       uses: actions/setup-go@v4

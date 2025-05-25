@@ -2,8 +2,8 @@ package utils
 
 import (
 	"testing"
-)
 
+)
 
 func TestGetCapital (t *testing.T) {
 	tests := []struct {
@@ -22,10 +22,10 @@ func TestGetCapital (t *testing.T) {
 			
 			if err != nil {
 				t.Errorf("GetCapital(%s) = %s, %v; want %s, nil", tt.province, receivedCapital, err, tt.expectedCapital)
-			}
+				}
 			if receivedCapital != tt.expectedCapital {
 				t.Errorf("GetCapital(%s) = %s; want %s", tt.province, receivedCapital, tt.expectedCapital)
-			}
+		}
  		})
 	}
 }

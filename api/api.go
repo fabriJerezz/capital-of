@@ -1,11 +1,10 @@
 package api
-
 import (
 	"net/http"
 	"fmt"
 	"ci-environment/utils"
 )
-
+// solo cambio esto
 func Handler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
 		province := r.URL.Query().Get("provincia")

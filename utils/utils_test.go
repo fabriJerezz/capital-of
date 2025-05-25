@@ -2,8 +2,8 @@ package utils
 
 import (
 	"testing"
-)
 
+)
 
 func TestGetCapital (t *testing.T) {
 	tests := []struct {
@@ -13,7 +13,7 @@ func TestGetCapital (t *testing.T) {
 	}{
 		{"real province", "Chaco", "Resistencia"},
 		{"case and accent marks", "sÁnTá fÉ", "Santa Fe"},
-		{"another word", "Chiavenato", "No se encontró la provincia Chiavenato"},
+		{"another word", "Chiavenato", ""},
 	}
 	
 	for _, tt := range tests {
@@ -22,10 +22,10 @@ func TestGetCapital (t *testing.T) {
 			
 			if err != nil {
 				t.Errorf("GetCapital(%s) = %s, %v; want %s, nil", tt.province, receivedCapital, err, tt.expectedCapital)
-			}
+				}
 			if receivedCapital != tt.expectedCapital {
 				t.Errorf("GetCapital(%s) = %s; want %s", tt.province, receivedCapital, tt.expectedCapital)
-			}
+		}
  		})
 	}
 }
@@ -49,5 +49,5 @@ func TestRemoveAccentMarks (t *testing.T) {
 				t.Errorf("RemoveActionMarks(%s) = %s; want %s", tt.entryString, receivedString, tt.expectedString)
 			}
 		})
-		}
+	}
 } 

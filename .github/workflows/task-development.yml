@@ -32,4 +32,11 @@ jobs:
 
     - name: Run api tests
       run: go test -v ./api
-      
+
+    - name: Wait for the deploy
+      run: sleep 60  # Ajustá el tiempo según cuánto demore Render
+
+    - name: Production test
+      run: |
+        curl -s /dev/null https://ci-environment.onrender.com/obtener-capital?provincia=chaco | grep -q "La capital es Resistencia"
+

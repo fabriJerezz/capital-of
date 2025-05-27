@@ -46,8 +46,6 @@ func TestHandler(t *testing.T) {
 			}
 			
 			body := w.Body.String()
-			
-			
 			if body != tt.expectedBody {
 				t.Errorf("expected body %q, got %q", tt.expectedBody, body)
 			}

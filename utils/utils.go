@@ -4,12 +4,14 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"strings"
 	"path/filepath"
+	"runtime"
+	"strings"
+	"log"
 )
 
 func GetCapital(province string) (string, error) {
-	filePath := GetFilePath("data", "capital_cities.json") 
+	filePath := GetFilePath("data/capital_cities.json") 
 	jsonContent, err := os.ReadFile(filePath)
 	
 	if err != nil {
@@ -49,13 +51,13 @@ func RemoveAccentMarks(str string) string {
 }
 
 
-func GetFilePath(folder string, filename string) string {
-	wd, err := os.Getwd()
-	wd = filepath.Dir(wd)
-	
-	if err != nil {
-		panic(err)
+func GetFilePath(pathInsideTheProject string) string {
+	_, currentFilePath, _, ok := runtime.Caller(0)
+	if !ok {
+		log.Fatal("Couldn't obtain the current file path")
 	}
-	
-	return filepath.Join(wd, folder, filename)
+	projectFilePath := filepath.Dir(currentFilePath)
+	projectFilePath = filepath.Dir(projectFilePath)
+	targetFilePath := filepath.Join(projectFilePath, pathInsideTheProject)
+	return targetFilePath
 }

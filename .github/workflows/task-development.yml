@@ -1,0 +1,42 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: Task Development CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build-and-tests:
+    runs-on: ubuntu-latest
+    steps:
+    # reusable actions that the job uses
+    - uses: actions/checkout@v4
+
+    # This is where I would install dependencies if there were any
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.24'
+
+    - name: Build
+      run: go build -v ./...
+
+    - name: Run business logic tests
+      run: go test -v ./utils
+
+    - name: Run api tests
+      run: go test -v ./api
+
+    - name: Wait for the deploy
+      run: sleep 60  # Ajustá el tiempo según cuánto demore Render
+
+    - name: Production test
+      run: |
+        curl -s /dev/null https://ci-environment.onrender.com/obtener-capital?provincia=chaco | grep -q "La capital es Resistencia"
+

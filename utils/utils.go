@@ -53,7 +53,6 @@ func RemoveAccentMarks(str string) string {
 
 func GetFilePath(pathInsideTheProject string) string {
 	_, currentFilePath, _, ok := runtime.Caller(0)
-	log.Print()
 	if !ok {
 		log.Fatal("Couldn't obtain the current file path")
 	}

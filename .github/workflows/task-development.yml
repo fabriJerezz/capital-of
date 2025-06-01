@@ -40,3 +40,25 @@ jobs:
       run: |
         curl -s /dev/null https://ci-environment.onrender.com/obtener-capital?provincia=chaco | grep -q "La capital es Resistencia"
 
+    - name: Notificación éxito
+      if: success()
+      uses: slackapi/slack-github-action@v1.24.0
+      with:
+        payload: |
+          {
+            "text": ":white_check_mark: Todo salió bien en *${{ github.repository }}*."
+          }
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    - name: Notificación error
+      if: failure()
+      uses: slackapi/slack-github-action@v1.24.0
+      with:
+        payload: |
+          {
+            "text": ":x: Error en *${{ github.repository }}*."
+          }
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+

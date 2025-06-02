@@ -38,15 +38,11 @@ jobs:
       if: success()
       uses: slackapi/slack-github-action@v1.24.0
       env:
-        GITHUB_ACTOR: ${{ github.actor }}          # usuario que hizo la acción
-        GITHUB_EVENT_NAME: ${{ github.event_name }} # tipo de evento (push, pull_request)
-        GITHUB_REF: ${{ github.ref }}                # rama o PR ref
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       with:
         payload: |
           {
-            "text": "Todo salió bien! :partying_face: \n GITHUB_ACTOR hizo un GITHUB_EVENT_NAME en GITHUB_REF
-            "
+            "text": "Todo salió bien! :partying_face: \n ${{ github.actor }} hizo un ${{ github.event_name }} en ${{ github.ref }}"
           }
 
     - name: Notificación error

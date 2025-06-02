@@ -51,7 +51,7 @@ jobs:
       with:
         payload: |
           {
-            "text": ":x: Error en *${{ github.repository }}*."
+            "text": "No salió como esperabamos :confused: \n ${{ github.actor }} hizo un ${{ github.event_name }} en ${{ github.ref_name }}"
           }
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

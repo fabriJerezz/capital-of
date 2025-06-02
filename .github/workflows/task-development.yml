@@ -42,7 +42,7 @@ jobs:
       with:
         payload: |
           {
-            "text": "Todo salió bien! :partying_face: \n ${{ github.actor }} hizo un ${{ github.event_name }} en ${{ github.ref }}"
+            "text": "Todo salió bien! :partying_face: \n ${{ github.actor }} hizo un ${{ github.event_name }} en ${{ github.ref_name }}"
           }
 
     - name: Notificación error

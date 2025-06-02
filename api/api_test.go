@@ -26,7 +26,7 @@ func TestHandler(t *testing.T) {
 		{
 			"empty string",
 			"",
-			"Por favor ingrese una provincia",
+			"Por favor ingrese una provinciaa",
 		},
 	}
 	

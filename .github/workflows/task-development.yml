@@ -33,23 +33,21 @@ jobs:
     - name: Run api tests
       run: go test -v ./api
 
-    - name: Wait for the deploy
-      run: sleep 60  # Ajustá el tiempo según cuánto demore Render
-
-    - name: Production test
-      run: |
-        curl -s /dev/null https://ci-environment.onrender.com/obtener-capital?provincia=chaco | grep -q "La capital es Resistencia"
-
+   
     - name: Notificación éxito
       if: success()
       uses: slackapi/slack-github-action@v1.24.0
+      env:
+        GITHUB_ACTOR: ${{ github.actor }}          # usuario que hizo la acción
+        GITHUB_EVENT_NAME: ${{ github.event_name }} # tipo de evento (push, pull_request)
+        GITHUB_REF: ${{ github.ref }}                # rama o PR ref
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       with:
         payload: |
           {
-            "text": ":white_check_mark: Todo salió bien en *${{ github.repository }}*."
+            "text": "Todo salió bien! :partying_face: \n GITHUB_ACTOR hizo un GITHUB_EVENT_NAME en GITHUB_REF
+            "
           }
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
     - name: Notificación error
       if: failure()

@@ -45,14 +45,25 @@ jobs:
             "text": "Todo salió bien! :partying_face: \n ${{ github.actor }} hizo un ${{ github.event_name }} en ${{ github.ref_name }}"
           }
 
-    - name: Notificación error
-      if: failure()
+    - name: Notificación error commit
+      if: failure() && github.event_name == "commit"
       uses: slackapi/slack-github-action@v1.24.0
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       with:
         payload: |
           {
             "text": "No salió como esperabamos :confused: \n ${{ github.actor }} hizo un ${{ github.event_name }} en ${{ github.ref_name }}"
           }
+    - name: Notificación error pull request
+      if: failure() && github.event_name == "pull request"
+      uses: slackapi/slack-github-action@v1.24.0
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      with:
+        payload: |
+          {
+            "text": "No salió como esperabamos :confused: \n ${{ github.actor }} hizo una ${{ github.event_name }} desde ${{ github.event.pull_request.base.ref }} hacia ${{ github.event.pull_request.head.ref }}"
+          }
 
+    

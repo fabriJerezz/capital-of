@@ -25,5 +25,6 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		
 	} else {
 		fmt.Fprintf(w, "Método http no válido")
+		fmt.Fprintf(w, "Método http no válido")
 	}
 }

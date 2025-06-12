@@ -52,7 +52,7 @@ jobs:
       with:
         payload: |
           {
-            "text": "Todo salió bien! :partying_face: \n ${{ github.actor }} abrió una pull request desde ${{ github.event.pull_request.base.ref }} hacia ${{ github.event.pull_request.head.ref }}"
+            "text": "Todo salió bien! :partying_face: \n ${{ github.actor }} abrió una pull request  desde ${{ github.event.pull_request.head.ref }} hacia  ${{ github.event.pull_request.base.ref }}"
           }
     - name: Notificación error commit
       if: failure() && github.event_name == 'commit'
@@ -72,7 +72,7 @@ jobs:
       with:
         payload: |
           {
-            "text": "No salió como esperabamos :confused: \n ${{ github.actor }} abrió una pull request desde ${{ github.event.pull_request.base.ref }} hacia ${{ github.event.pull_request.head.ref }}"
+            "text": "No salió como esperabamos :confused: \n ${{ github.actor }} abrió una pull request desde ${{ github.event.pull_request.head.ref }} hacia ${{ github.event.pull_request.base.ref }}"
           }
 
     

@@ -84,5 +84,15 @@ jobs:
           {
             "text": "No salió como esperabamos :confused: \n ${{ github.actor }} abrió una pull request desde ${{ github.event.pull_request.head.ref }} hacia ${{ github.event.pull_request.base.ref }}"
           }
+    - name: Notificación error cambio a pr abierta
+      if: success() && github.event_name == 'pull_request' && github.event.action == 'synchronized'
+      uses: slackapi/slack-github-action@v1.24.0
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      with:
+        payload: |
+          {
+            "text": "No salió como esperabamos :confused: \n ${{ github.actor }} hizo un cambio en la pull request desde ${{ github.event.pull_request.head.ref }} hacia  ${{ github.event.pull_request.base.ref }}"
+          }          
 
     

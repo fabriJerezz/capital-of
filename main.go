@@ -1,7 +1,7 @@
 package main
 
 import (
-	"capital-of/api"
+	"ci-environment/api"
 	// "ci-environment/utils"
 	"fmt"
 	"log"

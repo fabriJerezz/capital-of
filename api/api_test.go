@@ -21,7 +21,7 @@ func TestHandler(t *testing.T) {
 		{
 			"another word",
 			"scrum",
-			"No se encontró la provincia scrumm",
+			"No se encontró la provincia scrummm",
 		},
 		{
 			"empty string",

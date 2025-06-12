@@ -34,8 +34,8 @@ jobs:
       run: go test -v ./api
 
    
-    - name: Notificación éxito
-      if: success()
+    - name: Notificación éxito commit 
+      if: success() && github.event_name == 'commit'
       uses: slackapi/slack-github-action@v1.24.0
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -44,7 +44,16 @@ jobs:
           {
             "text": "Todo salió bien! :partying_face: \n ${{ github.actor }} hizo un ${{ github.event_name }} en ${{ github.ref_name }}"
           }
-
+    - name: Notificación éxito pull request
+      if: success() && github.event_name == 'pull_request'
+      uses: slackapi/slack-github-action@v1.24.0
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      with:
+        payload: |
+          {
+            "text": "Todo salió bien! :partying_face: \n ${{ github.actor }} hizo una pull request desde ${{ github.event.pull_request.base.ref }} hacia ${{ github.event.pull_request.head.ref }}"
+          }
     - name: Notificación error commit
       if: failure() && github.event_name == 'commit'
       uses: slackapi/slack-github-action@v1.24.0

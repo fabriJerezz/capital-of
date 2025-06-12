@@ -72,7 +72,7 @@ jobs:
       with:
         payload: |
           {
-            "text": "No salió como esperabamos :confused: \n ${{ github.actor }} abrió una pull request  desde ${{ github.event.pull_request.head.ref }} hacia  ${{ github.event.pull_request.base.ref }}"
+            "text": "No salió como esperabamos :confused: \n ${{ github.actor }} abrió una pull request desde ${{ github.event.pull_request.head.ref }} hacia ${{ github.event.pull_request.base.ref }}"
           }
 
     

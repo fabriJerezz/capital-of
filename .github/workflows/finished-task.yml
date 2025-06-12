@@ -19,5 +19,5 @@ jobs:
         with:
           payload: |
             {
-              "text": ":tada: ${{ github.actor }} mergeó la PR '${{ github.event.pull_request.title }}' desde `${{ github.event.pull_request.head.ref }}` hacia `${{ github.event.pull_request.base.ref }}`"
+              "text": ":tada: ${{ github.actor }} mergeó la pr *${{ github.event.pull_request.title }}* desde `${{ github.event.pull_request.head.ref }}` hacia `${{ github.event.pull_request.base.ref }}`"
             }

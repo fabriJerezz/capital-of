@@ -2,7 +2,7 @@ package api
 import (
 	"net/http"
 	"fmt"
-	"capital-of/utils"
+	"ci-environment/utils"
 )
 // solo cambio esto
 func Handler(w http.ResponseWriter, r *http.Request) {

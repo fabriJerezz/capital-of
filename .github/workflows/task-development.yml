@@ -75,7 +75,7 @@ jobs:
             "text": "No salió como esperabamos :confused: \n ${{ github.actor }} hizo un commit en ${{ github.ref_name }}"
           }
     - name: Notificación error pull request
-      if: failure() && github.event_name == 'pull_request'
+      if: failure() && github.event_name == 'pull_request' && github.event.action == 'opened'
       uses: slackapi/slack-github-action@v1.24.0
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

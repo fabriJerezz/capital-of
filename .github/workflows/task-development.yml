@@ -33,7 +33,9 @@ jobs:
       run: go test -v ./api
 
    
-  
+  feedback:
+    runs-on: ubuntu-latest
+    steps:
     - name: Notificación éxito pull request abierta
       if: success() && github.event_name == 'pull_request' && github.event.action == 'opened'
       uses: slackapi/slack-github-action@v1.24.0

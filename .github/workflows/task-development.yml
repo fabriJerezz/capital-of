@@ -94,6 +94,6 @@ jobs:
         payload: |
           {
             "text": "No salió como esperabamos :confused: \n ${{ github.actor }} hizo un cambio en la pull request desde ${{ github.event.pull_request.head.ref }} hacia ${{ github.event.pull_request.base.ref }}"
-          }          
+          }
 
     

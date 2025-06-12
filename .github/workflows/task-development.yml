@@ -35,16 +35,7 @@ jobs:
       run: go test -v ./api
 
    
-    - name: Notificación éxito commit 
-      if: success() && github.event_name == 'commit'
-      uses: slackapi/slack-github-action@v1.24.0
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      with:
-        payload: |
-          {
-            "text": "Todo salió bien! :partying_face: \n ${{ github.actor }} hizo un ${{ github.event_name }} en ${{ github.ref_name }}"
-          }
+  
     - name: Notificación éxito pull request abierta
       if: success() && github.event_name == 'pull_request' && github.event.action == 'opened'
       uses: slackapi/slack-github-action@v1.24.0
@@ -53,7 +44,7 @@ jobs:
       with:
         payload: |
           {
-            "text": "Todo salió bien! :partying_face: \n ${{ github.actor }} abrió una pull request  desde ${{ github.event.pull_request.head.ref }} hacia  ${{ github.event.pull_request.base.ref }}"
+            "text": "Todo salió bien! :partying_face: \n ${{ github.actor }} abrió una pull request  desde `${{ github.event.pull_request.head.ref }}` hacia `${{ github.event.pull_request.base.ref }}`"
           }
     - name: Notificación éxito cambio a pr abierta
       if: success() && github.event_name == 'pull_request' && github.event.action == 'synchronize'
@@ -63,17 +54,7 @@ jobs:
       with:
         payload: |
           {
-            "text": "Todo salió bien! :partying_face: \n ${{ github.actor }} hizo un cambio en la pull request desde ${{ github.event.pull_request.head.ref }} hacia  ${{ github.event.pull_request.base.ref }}"
-          }
-    - name: Notificación error commit
-      if: failure() && github.event_name == 'commit'
-      uses: slackapi/slack-github-action@v1.24.0
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      with:
-        payload: |
-          {
-            "text": "No salió como esperabamos :confused: \n ${{ github.actor }} hizo un commit en ${{ github.ref_name }}"
+            "text": "Todo salió bien! :partying_face: \n ${{ github.actor }} hizo un cambio en la pull request desde `${{ github.event.pull_request.head.ref }}` hacia `${{ github.event.pull_request.base.ref }}`"
           }
     - name: Notificación error pull request
       if: failure() && github.event_name == 'pull_request' && github.event.action == 'opened'
@@ -83,7 +64,7 @@ jobs:
       with:
         payload: |
           {
-            "text": "No salió como esperabamos :confused: \n ${{ github.actor }} abrió una pull request desde ${{ github.event.pull_request.head.ref }} hacia ${{ github.event.pull_request.base.ref }}"
+            "text": "No salió como esperabamos :confused: \n ${{ github.actor }} abrió una pull request desde `${{ github.event.pull_request.head.ref }}` hacia `${{ github.event.pull_request.base.ref }}`"
           }
     - name: Notificación error cambio a pr abierta
       if: failure() && github.event_name == 'pull_request' && github.event.action == 'synchronize'
@@ -93,7 +74,7 @@ jobs:
       with:
         payload: |
           {
-            "text": "No salió como esperabamos :confused: \n ${{ github.actor }} hizo un cambio en la pull request desde ${{ github.event.pull_request.head.ref }} hacia ${{ github.event.pull_request.base.ref }}"
+            "text": "No salió como esperabamos :confused: \n ${{ github.actor }} hizo un cambio en la pull request desde `${{ github.event.pull_request.head.ref }}` hacia `${{ github.event.pull_request.base.ref }}`"
           }
 
     
